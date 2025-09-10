@@ -1,0 +1,26 @@
+name: Security Scan with OWASP ZAP
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run OWASP ZAP Scan
+        run: |
+          docker run -v $(pwd):/zap/wrk/:rw --network="host" \
+          owasp/zap2docker-stable zap-baseline.py \
+          -t https://www.saucedemo.com \
+          -r zap_report.html
+
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: ZAP Security Report
+          path: zap_report.html
