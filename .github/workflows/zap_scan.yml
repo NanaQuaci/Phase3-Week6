@@ -21,7 +21,7 @@ jobs:
             zaproxy/zap-stable \
             zap-baseline.py \
               -t https://www.saucedemo.com \
-              -r /zap/wrk/zap_report.html
+              -r zap_report.html
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
