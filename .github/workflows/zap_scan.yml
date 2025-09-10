@@ -14,7 +14,7 @@ jobs:
 
       - name: Run OWASP ZAP Scan
         run: |
-          docker run -v $(pwd):/zap/wrk/:rw --network="host" \
+          docker run --rm -v $(pwd):/zap/wrk/:rw \
           owasp/zap2docker-stable zap-baseline.py \
           -t https://www.saucedemo.com \
           -r "2025-09-09-ZAP-Report-.html"
