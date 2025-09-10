@@ -17,7 +17,7 @@ jobs:
 
       - name: Run OWASP ZAP Scan
         run: |
-          docker run --rm -v $(pwd)/reports:/zap/wrk/:rw \
+          docker run --rm -u root -v $(pwd)/reports:/zap/wrk/:rw \
             zaproxy/zap-stable \
             zap-baseline.py \
               -t https://www.saucedemo.com \
