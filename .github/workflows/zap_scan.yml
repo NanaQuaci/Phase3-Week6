@@ -10,17 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run OWASP ZAP Scan
         run: |
           docker run -v $(pwd):/zap/wrk/:rw --network="host" \
           owasp/zap2docker-stable zap-baseline.py \
           -t https://www.saucedemo.com \
-          -r zap_report.html
+          -r "2025-09-09-ZAP-Report-.html"
 
       - name: Upload ZAP Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ZAP Security Report
-          path: zap_report.html
+          path: "2025-09-09-ZAP-Report-.html"
