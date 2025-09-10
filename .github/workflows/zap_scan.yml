@@ -18,10 +18,10 @@ jobs:
             zaproxy/zap-stable \
             zap-baseline.py \
               -t https://www.saucedemo.com \
-              -r "2025-09-09-ZAP-Report-.html"
+              -r zap_report.html
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         with:
           name: ZAP Security Report
-          path: "2025-09-09-ZAP-Report-.html"
+          path: zap_report.html
