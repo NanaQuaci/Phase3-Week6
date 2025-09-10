@@ -36,3 +36,20 @@ jobs:
           publish_dir: ./reports
           publish_branch: gh-pages
           force_orphan: true
+
+
+  notify-slack:
+    needs: zap_scan
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Send Slack notification
+        run: |
+          STATUS="${{ needs.zap_scan.result }}"
+          EMOJI="❌"
+          if [ "$STATUS" = "success" ]; then
+            EMOJI="✅"
+          fi
+          curl -X POST -H 'Content-type: application/json' --data "{
+            \"text\": \"${EMOJI} OWASP ZAP CI/CD finished with status: *$STATUS*\nRepo: $GITHUB_REPOSITORY\nCommit: <https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA|$GITHUB_SHA>\nZAP Report: https://$GITHUB_REPOSITORY_OWNER.github.io/${{ github.event.repository.name }}/zap_report.html\" 
+          }" ${{ secrets.SLACK_WEBHOOK_URL }}
