@@ -47,9 +47,18 @@ jobs:
         run: |
           STATUS="${{ needs.zap_scan.result }}"
           EMOJI="❌"
+          COLOR="danger"
           if [ "$STATUS" = "success" ]; then
             EMOJI="✅"
+            COLOR="good"
           fi
+
           curl -X POST -H 'Content-type: application/json' --data "{
-            \"text\": \"${EMOJI} OWASP ZAP CI/CD finished with status: *$STATUS*\nRepo: $GITHUB_REPOSITORY\nCommit: <https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA|$GITHUB_SHA>\nZAP Report: https://$GITHUB_REPOSITORY_OWNER.github.io/${{ github.event.repository.name }}/zap_report.html\" 
+            \"attachments\": [
+              {
+                \"color\": \"$COLOR\",
+                \"mrkdwn_in\": [\"text\"],
+                \"text\": \"$EMOJI *OWASP ZAP Security Scan*\n*Repo:* <$GITHUB_SERVER_URL/$GITHUB_REPOSITORY|$GITHUB_REPOSITORY>\n*Branch:* $GITHUB_REF_NAME\n*Commit:* <$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA|$GITHUB_SHA>\n*Status:* *$STATUS*\n:clipboard: *Reports:*\n• <https://$GITHUB_REPOSITORY_OWNER.github.io/${{ github.event.repository.name }}/zap_report.html|ZAP Report>\n• <https://github.com/$GITHUB_REPOSITORY/actions/runs/${{ github.run_id }}|GitHub Actions Logs>\"
+              }
+            ]
           }" ${{ secrets.SLACK_WEBHOOK_URL }}
