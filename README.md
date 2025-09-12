@@ -56,7 +56,7 @@ The **formal audit report** includes:
 - Executive Summary
 - Scope
 - Methodology
-- Vulnerabilities (with evidence)
+- Vulnerabilities (with evidence)+++
 - Test Results
 - Risk Assessment & Prioritization
 - CI/CD Integration with OWASP ZAP
