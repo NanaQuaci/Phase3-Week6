@@ -20,7 +20,7 @@ jobs:
           docker run --rm -u root -v $(pwd)/reports:/zap/wrk/:rw \
             zaproxy/zap-stable \
             zap-baseline.py \
-              -t https://www.saucedemo.com \
+              -t https://globalsqa.com/angularJs-protractor/BankingProject/#/login \
               -r zap_report.html || true
 
       - name: Upload ZAP Report

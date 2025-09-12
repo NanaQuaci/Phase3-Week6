@@ -76,16 +76,16 @@ docker run --rm -u root -v $(pwd):/zap/wrk/:rw   zaproxy/zap-stable   zap-baseli
 ---
 
 ## 🏆 Grading Scheme
-| Metric | Score |
-|--------|-------|
-| Executive Summary | 10 |
-| Scope | 10 |
-| Methodology | 15 |
-| Vulnerabilities | 15 |
-| Test Results | 10 |
-| Risk Assessment & Prioritization | 10 |
-| CI/CD Pipeline, Notification & Report Generation | 30 |
-| **Total** | **100** |
+| Metric                                           | Score   |
+|--------------------------------------------------|---------|
+| Executive Summary                                | 10      |
+| Scope                                            | 10      |
+| Methodology                                      | 15      |
+| Vulnerabilities                                  | 15      |
+| Test Results                                     | 10      |
+| Risk Assessment & Prioritization                 | 10      |
+| CI/CD Pipeline, Notification & Report Generation | 30      |
+| **Total**                                        | **100** |
 
 ---
 
